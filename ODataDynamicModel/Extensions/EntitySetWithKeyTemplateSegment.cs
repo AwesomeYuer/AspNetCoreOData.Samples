@@ -26,18 +26,18 @@ namespace ODataDynamicModel.Extensions
 
         public override bool TryTranslate(ODataTemplateTranslateContext context)
         {
-            if (!context.RouteValues.TryGetValue("entityset", out object entitysetNameObj))
+            if (!context.RouteValues.TryGetValue("entityset", out object? entitysetNameObj))
             {
                 return false;
             }
 
-            if (!context.RouteValues.TryGetValue("key", out object keyObj))
+            if (!context.RouteValues.TryGetValue("key", out object? keyObj))
             {
                 return false;
             }
 
-            string entitySetName = entitysetNameObj as string;
-            string keyValue = keyObj as string;
+            string? entitySetName = entitysetNameObj as string;
+            string? keyValue = keyObj as string;
 
             // if you want to support case-insensitive
             var edmEntitySet = context.Model.EntityContainer.EntitySets()

@@ -23,16 +23,16 @@ namespace ODataDynamicModel.Extensions
 
         public override bool TryTranslate(ODataTemplateTranslateContext context)
         {
-            if (!context.RouteValues.TryGetValue("navigation", out object navigationNameObj))
+            if (!context.RouteValues.TryGetValue("navigation", out object? navigationNameObj))
             {
                 return false;
             }
 
-            string navigationName = navigationNameObj as string;
-            KeySegment keySegment = context.Segments.Last() as KeySegment;
-            IEdmEntityType entityType = keySegment.EdmType as IEdmEntityType;
+            string? navigationName = navigationNameObj as string;
+            KeySegment? keySegment = context.Segments.Last() as KeySegment;
+            IEdmEntityType? entityType = keySegment!.EdmType as IEdmEntityType;
 
-            IEdmNavigationProperty navigationProperty = entityType.NavigationProperties().FirstOrDefault(n => n.Name == navigationName);
+            IEdmNavigationProperty navigationProperty = entityType.NavigationProperties().FirstOrDefault(n => n.Name == navigationName)!;
             if (navigationProperty != null)
             {
                 var navigationSource = keySegment.NavigationSource;

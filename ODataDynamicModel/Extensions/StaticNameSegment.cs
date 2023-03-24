@@ -24,7 +24,7 @@ namespace ODataDynamicModel.Extensions
         public override bool TryTranslate(ODataTemplateTranslateContext context)
         {
             KeySegment? keySegment = context.Segments.Last() as KeySegment;
-            IEdmEntityType? entityType = keySegment.EdmType as IEdmEntityType;
+            IEdmEntityType? entityType = keySegment!.EdmType as IEdmEntityType;
             IEdmProperty? edmProperty = entityType.Properties().FirstOrDefault(p => p.Name == "Name");
             if (edmProperty != null)
             {

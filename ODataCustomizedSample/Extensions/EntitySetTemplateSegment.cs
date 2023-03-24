@@ -24,12 +24,12 @@ namespace ODataCustomizedSample.Extensions
 
         public override bool TryTranslate(ODataTemplateTranslateContext context)
         {
-            if (!context.RouteValues.TryGetValue("classname", out object classname))
+            if (!context.RouteValues.TryGetValue("classname", out object? classname))
             {
                 return false;
             }
 
-            string entitySetName = classname as string;
+            string? entitySetName = classname as string;
 
             // if you want to support case-insenstivie
             var edmEntitySet = context.Model.EntityContainer.EntitySets()

@@ -11,13 +11,13 @@ namespace ODataRoutingSample.Models
     {
         public int Id { get; set; }
 
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
-        public virtual Category Category { get; set; }
+        public virtual Category? Category { get; set; }
     }
 
     public class VipOrder : Order
     {
-        public virtual Category VipCategory { get; set; }
+        public virtual Category? VipCategory { get; set; }
     }
 }

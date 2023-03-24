@@ -87,13 +87,13 @@ namespace ODataDynamicModel.Extensions
                     continue;
                 }
 
-                IODataRoutingMetadata metadata = candidate.Endpoint.Metadata.OfType<IODataRoutingMetadata>().FirstOrDefault();
+                IODataRoutingMetadata metadata = candidate.Endpoint.Metadata.OfType<IODataRoutingMetadata>().FirstOrDefault()!;
                 if (metadata == null)
                 {
                     continue;
                 }
 
-                IEdmModel model = GetEdmModel(candidate.Values);
+                IEdmModel model = GetEdmModel(candidate.Values!);
                 if (model == null)
                 {
                     continue;
@@ -111,7 +111,7 @@ namespace ODataDynamicModel.Extensions
                         odataFeature.Model = model;
                         odataFeature.Path = odataPath;
 
-                        MergeRouteValues(translatorContext.UpdatedValues, candidate.Values);
+                        MergeRouteValues(translatorContext.UpdatedValues, candidate.Values!);
                     }
                     else
                     {
@@ -138,22 +138,22 @@ namespace ODataDynamicModel.Extensions
         {
             if (routeValues == null)
             {
-                return null;
+                return null!;
             }
 
-            if (!routeValues.TryGetValue("datasource", out object datasourceObj))
+            if (!routeValues.TryGetValue("datasource", out object? datasourceObj))
             {
-                return null;
+                return null!;
             }
 
-            string dataSource = datasourceObj as string;
+            string? dataSource = datasourceObj as string;
             if (dataSource == null)
             {
-                return null;
+                return null!;
             }
 
-            _provider.DataSources.TryGetValue(dataSource, out IDataSource edmSource);
-            return edmSource?.GetEdmModel();
+            _provider.DataSources.TryGetValue(dataSource, out IDataSource? edmSource);
+            return edmSource!.GetEdmModel()!;
         }
     }
 }

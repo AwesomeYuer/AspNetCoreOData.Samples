@@ -21,7 +21,7 @@ namespace ODataCustomizedSample.Models
             employee.CollectionProperty<Skill>(c => c.SkillSet);
             employee.EnumProperty<Gender>(c => c.Gender);
             employee.EnumProperty<AccessLevel>(c => c.AccessLevel);
-            employee.ComplexProperty<FavoriteSports>(c => c.FavoriteSports);
+            employee.ComplexProperty<FavoriteSports>(c => c.FavoriteSports!);
 
             var skill = builder.EnumType<Skill>();
             skill.Member(Skill.CSharp);

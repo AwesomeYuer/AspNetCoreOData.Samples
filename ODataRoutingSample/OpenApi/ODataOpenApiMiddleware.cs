@@ -122,21 +122,21 @@ namespace ODataRoutingSample.OpenApi
             // accept=application/json;version3.0
             HttpRequest request = context.Request;
 
-            string dollarFormatValue = null;
+            string dollarFormatValue = null!;
             IQueryCollection queryCollection = request.Query;
             if (queryCollection.ContainsKey("$format"))
             {
                 StringValues dollarFormat = queryCollection["$format"];
-                dollarFormatValue = dollarFormat.FirstOrDefault();
+                dollarFormatValue = dollarFormat.FirstOrDefault()!;
             }
 
             if (dollarFormatValue != null)
             {
                 MediaTypeHeaderValue parsedValue;
-                bool success = MediaTypeHeaderValue.TryParse(dollarFormatValue, out parsedValue);
+                bool success = MediaTypeHeaderValue.TryParse(dollarFormatValue, out parsedValue!);
                 if (success)
                 {
-                    NameValueHeaderValue nameValueHeaderValue = parsedValue.Parameters.FirstOrDefault(p => p.Name == "version");
+                    NameValueHeaderValue nameValueHeaderValue = parsedValue.Parameters.FirstOrDefault(p => p.Name == "version")!;
                     if (nameValueHeaderValue != null)
                     {
                         string version = nameValueHeaderValue.Value.Value;
@@ -197,7 +197,7 @@ namespace ODataRoutingSample.OpenApi
         {
             Contract.Assert(context != null);
 
-            prefixName = null;
+            prefixName = null!;
             string path = context.Request.Path;
             foreach (var item in _templateMappings)
             {

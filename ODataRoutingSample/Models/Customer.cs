@@ -13,19 +13,19 @@ namespace ODataRoutingSample.Models
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         public Color FavoriteColor { get; set; }
 
         public int Amount { get; set; }
 
-        public virtual Address HomeAddress { get; set; }
+        public virtual Address? HomeAddress { get; set; }
 
-        public virtual IList<Address> FavoriteAddresses { get; set; }
+        public virtual IList<Address>? FavoriteAddresses { get; set; }
     }
 
     public class VipCustomer : Customer
     {
-        public IList<string> Emails { get; set; }
+        public IList<string>? Emails { get; set; }
     }
 }

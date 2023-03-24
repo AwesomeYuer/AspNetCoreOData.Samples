@@ -13,7 +13,7 @@ namespace ODataDynamicModel.Extensions
 {
     internal class MyDataSource : IDataSource
     {
-        private static IEdmModel _edmModel;
+        private static IEdmModel? _edmModel;
 
         public virtual IEdmModel GetEdmModel()
         {
@@ -83,10 +83,10 @@ namespace ODataDynamicModel.Extensions
 
         private IEdmEntityObject CreateDetailInfo(int id, string title, IEdmStructuredType edmType)
         {
-            IEdmNavigationProperty navigationProperty = edmType.DeclaredProperties.OfType<EdmNavigationProperty>().FirstOrDefault(e => e.Name == "DetailInfo");
+            IEdmNavigationProperty navigationProperty = edmType.DeclaredProperties.OfType<EdmNavigationProperty>().FirstOrDefault(e => e.Name == "DetailInfo")!;
             if (navigationProperty == null)
             {
-                return null;
+                return null!;
             }
 
             EdmEntityObject entity = new EdmEntityObject(navigationProperty.ToEntityType());

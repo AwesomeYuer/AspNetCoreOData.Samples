@@ -27,7 +27,7 @@ namespace ODataRoutingSample.Controllers.v2
         {
             _context = context;
 
-            if (_context.Orders.Count() == 0)
+            if (_context.Orders!.Count() == 0)
             {
                 IList<Order> orders = new List<Order>
                 {
@@ -50,7 +50,7 @@ namespace ODataRoutingSample.Controllers.v2
 
                 foreach (var order in orders)
                 {
-                    _context.Orders.Add(order);
+                    _context.Orders!.Add(order);
                 }
 
                 _context.SaveChanges();
@@ -61,7 +61,7 @@ namespace ODataRoutingSample.Controllers.v2
         [EnableQuery]
         public IEnumerable<Order> Get()
         {
-            return _context.Orders;
+            return _context.Orders!;
         }
 
         [HttpGet] // ~/Orders({key})
@@ -79,7 +79,7 @@ namespace ODataRoutingSample.Controllers.v2
         [EnableQuery]
         public IActionResult Post([FromBody] Order order, CancellationToken token)
         {
-            _context.Orders.Add(order);
+            _context.Orders!.Add(order);
             _context.SaveChanges();
             return Created(order);
         }

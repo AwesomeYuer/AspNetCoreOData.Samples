@@ -94,10 +94,10 @@ namespace ODataRoutingSample.Controllers
         {
             IDictionary<string, ODataPath> tempateToPathDict = new Dictionary<string, ODataPath>();
             ODataOpenApiPathProvider provider = new ODataOpenApiPathProvider();
-            IEdmModel model = null;
+            IEdmModel model = null!;
             foreach (var endpoint in _dataSource.Endpoints)
             {
-                IODataRoutingMetadata metadata = endpoint.Metadata.GetMetadata<IODataRoutingMetadata>();
+                IODataRoutingMetadata metadata = endpoint.Metadata.GetMetadata<IODataRoutingMetadata>()!;
                 if (metadata == null)
                 {
                     continue;
@@ -109,7 +109,7 @@ namespace ODataRoutingSample.Controllers
                 }
                 model = metadata.Model;
 
-                RouteEndpoint routeEndpoint = endpoint as RouteEndpoint;
+                RouteEndpoint? routeEndpoint = endpoint as RouteEndpoint;
                 if (routeEndpoint == null)
                 {
                     continue;
@@ -117,10 +117,10 @@ namespace ODataRoutingSample.Controllers
 
                 // get rid of the prefix
                 int length = prefixName.Length;
-                string routePathTemplate = routeEndpoint.RoutePattern.RawText.Substring(length);
+                string routePathTemplate = routeEndpoint.RoutePattern.RawText!.Substring(length);
                 routePathTemplate = routePathTemplate.StartsWith("/") ? routePathTemplate : "/" + routePathTemplate;
 
-                if (tempateToPathDict.TryGetValue(routePathTemplate, out ODataPath pathValue))
+                if (tempateToPathDict.TryGetValue(routePathTemplate, out ODataPath? pathValue))
                 {
                     var methods = GetHttpMethods(endpoint);
                     foreach (var method in methods)
@@ -167,21 +167,21 @@ namespace ODataRoutingSample.Controllers
             // accept=application/json;version3.0
             HttpRequest request = context.Request;
 
-            string dollarFormatValue = null;
+            string dollarFormatValue = null!;
             IQueryCollection queryCollection = request.Query;
             if (queryCollection.ContainsKey("$format"))
             {
                 StringValues dollarFormat = queryCollection["$format"];
-                dollarFormatValue = dollarFormat.FirstOrDefault();
+                dollarFormatValue = dollarFormat.FirstOrDefault()!;
             }
 
             if (dollarFormatValue != null)
             {
                 MediaTypeHeaderValue parsedValue;
-                bool success = MediaTypeHeaderValue.TryParse(dollarFormatValue, out parsedValue);
+                bool success = MediaTypeHeaderValue.TryParse(dollarFormatValue, out parsedValue!);
                 if (success)
                 {
-                    NameValueHeaderValue nameValueHeaderValue = parsedValue.Parameters.FirstOrDefault(p => p.Name == "version");
+                    NameValueHeaderValue nameValueHeaderValue = parsedValue.Parameters.FirstOrDefault(p => p.Name == "version")!;
                     if (nameValueHeaderValue != null)
                     {
                         string version = nameValueHeaderValue.Value.Value;
@@ -206,7 +206,7 @@ namespace ODataRoutingSample.Controllers
 
         private static IEnumerable<string> GetHttpMethods(Endpoint endpoint)
         {
-            HttpMethodMetadata methodMetadata = endpoint.Metadata.GetMetadata<HttpMethodMetadata>();
+            HttpMethodMetadata methodMetadata = endpoint.Metadata.GetMetadata<HttpMethodMetadata>()!;
             if (methodMetadata != null)
             {
                 return methodMetadata.HttpMethods;

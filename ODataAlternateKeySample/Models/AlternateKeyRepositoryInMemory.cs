@@ -22,7 +22,7 @@ namespace ODataAlternateKeySample.Models
                 Id = e,
                 Name = names[e - 1],
                 SSN = i % 2 == 0 ? "SSN-" + e + "-" + (100 + e) : "SSN-%25-" + e + "-" + (100 + e),
-                Titles = new string[] { "abc", null, "efg" }
+                Titles = new string[] { "abc", null!, "efg" }
             }).ToList();
 
             // Orders

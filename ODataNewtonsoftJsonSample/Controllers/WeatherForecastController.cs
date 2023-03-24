@@ -43,7 +43,7 @@ namespace ODataNewtonsoftJsonSample.Controllers
         // 3) ~/WeatherForecast
         // Try it and you will get different payload.
         [HttpGet]
-        [EnableQuery(AllowedFunctions= AllowedFunctions.All)]
+        [EnableQuery(AllowedFunctions= AllowedFunctions.AllFunctions)]
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();

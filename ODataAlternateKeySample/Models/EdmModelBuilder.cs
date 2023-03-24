@@ -21,12 +21,12 @@ namespace ODataAlternateKeySample.Models
             builder.EntitySet<Order>("Orders");
             builder.EntitySet<Person>("People");
 
-            EdmModel model = builder.GetEdmModel() as EdmModel;
+            EdmModel? model = builder.GetEdmModel() as EdmModel;
 
-            SetCustomerAlternateKey(model);
-            SetOrderAlternateKey(model);
-            SetPersonAlternateKey(model);
-            return model;
+            SetCustomerAlternateKey(model!);
+            SetOrderAlternateKey(model!);
+            SetPersonAlternateKey(model!);
+            return model!;
         }
 
         private static void SetCustomerAlternateKey(EdmModel model)

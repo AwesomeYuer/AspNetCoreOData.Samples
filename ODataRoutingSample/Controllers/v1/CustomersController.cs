@@ -26,13 +26,13 @@ namespace ODataRoutingSample.Controllers.v1
         public CustomersController(MyDataContext context)
         {
             _context = context;
-            if (_context.Customers.Count() == 0)
+            if (_context.Customers!.Count() == 0)
             {
                 IList<Customer> customers = GetCustomers();
 
                 foreach (var customer in customers)
                 {
-                    _context.Customers.Add(customer);
+                    _context.Customers!.Add(customer);
                 }
 
                 _context.SaveChanges();

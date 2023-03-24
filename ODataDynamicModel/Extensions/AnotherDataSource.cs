@@ -14,9 +14,9 @@ namespace ODataDynamicModel.Extensions
 {
     internal class AnotherDataSource : IDataSource
     {
-        private IEdmEntityType _school;
+        private IEdmEntityType? _school;
 
-        private static IEdmModel _edmModel;
+        private static IEdmModel? _edmModel;
 
         public virtual IEdmModel GetEdmModel()
         {
@@ -88,10 +88,10 @@ namespace ODataDynamicModel.Extensions
 
         private IEdmEntityObject Createchool(int id, DateTimeOffset dto, IEdmStructuredType edmType)
         {
-            IEdmNavigationProperty navigationProperty = edmType.DeclaredProperties.OfType<EdmNavigationProperty>().FirstOrDefault(e => e.Name == "School");
+            IEdmNavigationProperty navigationProperty = edmType.DeclaredProperties.OfType<EdmNavigationProperty>().FirstOrDefault(e => e.Name == "School")!;
             if (navigationProperty == null)
             {
-                return null;
+                return null!;
             }
 
             EdmEntityObject entity = new EdmEntityObject(navigationProperty.ToEntityType());

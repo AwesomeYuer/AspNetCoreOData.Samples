@@ -92,7 +92,7 @@ namespace ODataRoutingSample.Controllers
             }
 
             var finalQuery = queryOptions.ApplyTo(accountQuery.AsQueryable<Account>()) as IQueryable<dynamic>;
-            var result = finalQuery.FirstOrDefault();
+            var result = finalQuery!.FirstOrDefault();
 
             if (result == null)
             {

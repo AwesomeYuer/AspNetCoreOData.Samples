@@ -30,7 +30,7 @@ namespace ODataCustomizedSample.Controller
         /// <summary>
         /// static so that the data is shared among requests.
         /// </summary>
-        private static IList<Employee> Employees = null;
+        private static IList<Employee> Employees = null!;
 
         private void InitEmployees()
         {
@@ -97,32 +97,32 @@ namespace ODataCustomizedSample.Controller
                 return Ok(AccessLevel.Execute);
             }
 
-            return Ok(Employees.SingleOrDefault(e => e.ID == key).AccessLevel);
+            return Ok(Employees.SingleOrDefault(e => e.ID == key)!.AccessLevel);
         }
 
         public IActionResult GetNameFromEmployee(int key)
         {
-            return Ok(Employees.SingleOrDefault(e => e.ID == key).Name);
+            return Ok(Employees.SingleOrDefault(e => e.ID == key)!.Name);
         }
 
         [EnableQuery]
         public IActionResult GetSkillSetFromEmployee(int key)
         {
-            return Ok(Employees.SingleOrDefault(e => e.ID == key).SkillSet);
+            return Ok(Employees.SingleOrDefault(e => e.ID == key)!.SkillSet);
         }
 
         [EnableQuery]
         public IActionResult GetFavoriteSportsFromEmployee(int key)
         {
             var employee = Employees.SingleOrDefault(e => e.ID == key);
-            return Ok(employee.FavoriteSports);
+            return Ok(employee!.FavoriteSports);
         }
 
         [HttpGet("Employees({key})/FavoriteSports/LikeMost")] // non-OData routing
         public IActionResult GetFavoriteSportLikeMost(int key)
         {
             var firstOrDefault = Employees.FirstOrDefault(e => e.ID == key);
-            return Ok(firstOrDefault.FavoriteSports.LikeMost);
+            return Ok(firstOrDefault!.FavoriteSports!.LikeMost);
         }
 
         public IActionResult Post([FromBody] Employee employee)
@@ -136,19 +136,19 @@ namespace ODataCustomizedSample.Controller
         [HttpPost("Employees({key})/FavoriteSports/LikeMost")] // non-OData routing
         public IActionResult PostToSkillSet(int key, [FromBody] Skill newSkill)
         {
-            Employee employee = Employees.FirstOrDefault(e => e.ID == key);
+            Employee employee = Employees.FirstOrDefault(e => e.ID == key)!;
             if (employee == null)
             {
                 return NotFound();
             }
-            employee.SkillSet.Add(newSkill);
+            employee.SkillSet!.Add(newSkill);
             return Updated(employee.SkillSet);
         }
 
         public IActionResult Put(int key, [FromBody] Employee employee)
         {
             employee.ID = key;
-            Employee originalEmployee = Employees.SingleOrDefault(c => c.ID == key);
+            Employee originalEmployee = Employees.SingleOrDefault(c => c.ID == key)!;
 
             if (originalEmployee == null)
             {
@@ -164,7 +164,7 @@ namespace ODataCustomizedSample.Controller
 
         public IActionResult Patch(int key, [FromBody] Delta<Employee> delta)
         {
-            Employee originalEmployee = Employees.SingleOrDefault(c => c.ID == key);
+            Employee originalEmployee = Employees.SingleOrDefault(c => c.ID == key)!;
 
             if (originalEmployee == null)
             {
@@ -207,8 +207,8 @@ namespace ODataCustomizedSample.Controller
                 return Ok();
             }
 
-            Employee employee = Employees.FirstOrDefault(e => e.ID == key);
-            if (!employee.SkillSet.Contains(skill))
+            Employee employee = Employees.FirstOrDefault(e => e.ID == key)!;
+            if (!employee.SkillSet!.Contains(skill))
             {
                 employee.SkillSet.Add(skill);
             }
@@ -240,7 +240,7 @@ namespace ODataCustomizedSample.Controller
                 return Ok(AccessLevel.Read | AccessLevel.Write);
             }
 
-            Employee employee = Employees.FirstOrDefault(e => e.ID == ID);
+            Employee employee = Employees.FirstOrDefault(e => e.ID == ID)!;
             employee.AccessLevel = accessLevel;
             return Ok(employee.AccessLevel);
         }
@@ -253,7 +253,7 @@ namespace ODataCustomizedSample.Controller
                 return BadRequest();
             }
 
-            Employee employee = Employees.FirstOrDefault(e => e.ID == key);
+            Employee employee = Employees.FirstOrDefault(e => e.ID == key)!;
 
             return Ok(employee.AccessLevel);
         }

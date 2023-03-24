@@ -13,11 +13,11 @@ namespace ODataRoutingSample.Models
     {
         public Guid AccountId { get; set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public Address HomeAddress { get; set; }
+        public Address? HomeAddress { get; set; }
 
-        public AccountInfo AccountInfo { get; set; }
+        public AccountInfo? AccountInfo { get; set; }
     }
 
     public class AccountInfo

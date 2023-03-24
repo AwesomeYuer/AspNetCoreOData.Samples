@@ -13,7 +13,7 @@ namespace ODataRoutingSample.Models
     {
         public int Id { get; set; }
 
-        public string Category { get; set; }
+        public string? Category { get; set; }
 
         public Color Color { get; set; }
 
@@ -21,7 +21,7 @@ namespace ODataRoutingSample.Models
 
         public DateTimeOffset? UpdatedDate { get; set; }
 
-        public virtual ProductDetail Detail { get; set; }
+        public virtual ProductDetail? Detail { get; set; }
     }
 
     public class ProductDetail

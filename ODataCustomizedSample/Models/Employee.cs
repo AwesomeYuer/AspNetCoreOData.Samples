@@ -15,15 +15,15 @@ namespace ODataCustomizedSample.Models
     {
         public int ID { get; set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public List<Skill> SkillSet { get; set; }
+        public List<Skill>? SkillSet { get; set; }
 
         public Gender Gender { get; set; }
 
         public AccessLevel AccessLevel { get; set; }
 
-        public FavoriteSports FavoriteSports { get; set; }
+        public FavoriteSports? FavoriteSports { get; set; }
     }
 
     [Flags]
@@ -62,7 +62,7 @@ namespace ODataCustomizedSample.Models
     public class FavoriteSports
     {
         public Sport LikeMost { get; set; }
-        public List<Sport> Like { get; set; }
+        public List<Sport>? Like { get; set; }
     }
 
     [DataContract]

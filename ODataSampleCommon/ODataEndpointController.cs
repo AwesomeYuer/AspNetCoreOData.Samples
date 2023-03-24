@@ -98,7 +98,7 @@ namespace ODataSampleCommon
             sb.Append($"<td>{string.Join(",", GetHttpMethods(endpoint))}</td>");
 
             sb.Append("<td>");
-            var link = "" + endpoint.RoutePattern.RawText.TrimStart('/');
+            var link = "" + endpoint.RoutePattern.RawText!.TrimStart('/');
             sb.Append($"<a href=\"/{link}\">~/{link}</a>");
             sb.Append("</td>");
 

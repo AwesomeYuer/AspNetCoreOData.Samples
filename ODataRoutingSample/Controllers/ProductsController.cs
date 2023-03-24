@@ -25,7 +25,7 @@ namespace ODataRoutingSample.Controllers
         {
             _context = context;
 
-            if (_context.Products.Count() == 0)
+            if (_context.Products!.Count() == 0)
             {
                 IList<Product> products = new List<Product>
                 {
@@ -57,7 +57,7 @@ namespace ODataRoutingSample.Controllers
 
                 foreach (var product in products)
                 {
-                    _context.Products.Add(product);
+                    _context.Products!.Add(product);
                 }
 
                 _context.SaveChanges();
@@ -75,7 +75,7 @@ namespace ODataRoutingSample.Controllers
         [HttpGet]
         public IActionResult Get(int key)
         {
-            var product = _context.Products.FirstOrDefault(p => p.Id == key);
+            var product = _context.Products!.FirstOrDefault(p => p.Id == key);
             if (product == null)
             {
                 return NotFound($"Not found product with id = {key}");
@@ -88,7 +88,7 @@ namespace ODataRoutingSample.Controllers
        // [EnableQuery]
         public IActionResult Post([FromBody]Product product, CancellationToken token)
         {
-            _context.Products.Add(product);
+            _context.Products!.Add(product);
 
             _context.SaveChanges();
 
@@ -98,7 +98,7 @@ namespace ODataRoutingSample.Controllers
         [HttpPut]
         public IActionResult Put(int key, [FromBody]Delta<Product> product)
         {
-            var original = _context.Products.FirstOrDefault(p => p.Id == key);
+            var original = _context.Products!.FirstOrDefault(p => p.Id == key);
             if (original == null)
             {
                 return NotFound($"Not found product with id = {key}");
@@ -112,7 +112,7 @@ namespace ODataRoutingSample.Controllers
         [HttpPatch]
         public IActionResult Patch(int key, Delta<Product> product)
         {
-            var original = _context.Products.FirstOrDefault(p => p.Id == key);
+            var original = _context.Products!.FirstOrDefault(p => p.Id == key);
             if (original == null)
             {
                 return NotFound($"Not found product with id = {key}");
@@ -128,13 +128,13 @@ namespace ODataRoutingSample.Controllers
         [HttpDelete]
         public IActionResult Delete(int key)
         {
-            var original = _context.Products.FirstOrDefault(p => p.Id == key);
+            var original = _context.Products!.FirstOrDefault(p => p.Id == key);
             if (original == null)
             {
                 return NotFound($"Not found product with id = {key}");
             }
 
-            _context.Products.Remove(original);
+            _context.Products!.Remove(original);
             _context.SaveChanges();
             return Ok();
         }
