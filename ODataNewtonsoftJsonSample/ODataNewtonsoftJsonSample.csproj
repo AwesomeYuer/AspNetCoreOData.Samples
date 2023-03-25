@@ -3,12 +3,15 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.15" />
-    <PackageReference Include="Microsoft.AspNetCore.OData.NewtonsoftJson" Version="8.0.12" />
-  </ItemGroup>
+	<ItemGroup>
+		<!--<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />-->
+		<PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.12" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.15" />
+		<PackageReference Include="Microsoft.AspNetCore.OData.NewtonsoftJson" Version="8.0.12" />
+	</ItemGroup>
 
 </Project>
